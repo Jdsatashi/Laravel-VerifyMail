@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->bigInteger('phone')->nullable();
             $table->string('description')->nullable();
+            $table->string('role')->default('user');
+            $table->foreign('role')->references('role_name')->on('roles')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

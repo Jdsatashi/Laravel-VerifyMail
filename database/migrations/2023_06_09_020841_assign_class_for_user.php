@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('assigns', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('start');
-            $table->string('end');
-            $table->string('schedule');
-            $table->foreignId('course_id')->references('id')
-                ->on('courses')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('classe_id')->references('id')->on('classes');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('assign');
     }
 };

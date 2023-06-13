@@ -11,4 +11,17 @@
         {
             return User::where('email', $email)->first();
         }
+
+        public function show_profile($id)
+        {
+            // TODO: Implement show_profile() method.
+            return User::findOrFail($id);
+        }
+
+        public function update_profile($id, array $profile)
+        {
+            $user = User::findOrFail($id);
+            $user->update($profile);
+            return $user;
+        }
     }

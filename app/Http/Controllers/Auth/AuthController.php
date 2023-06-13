@@ -16,13 +16,14 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     use ResponseJson;
-    protected $userRepo;
+    protected IUserRepo $userRepo;
     public function __construct(IUserRepo $userRepo){
         $this->userRepo = $userRepo;
     }
 
     public function Register(RegisterRequest $request) {
         $data = $request->all();
+        $data['password'] = bcrypt($data['password']); // bcrypt password
         $user = $this->userRepo->create_user($data);
         event(new GetVerifyEven($user));
 
